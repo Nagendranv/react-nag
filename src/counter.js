@@ -3,6 +3,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  button {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    align: center;
+  }
+  table, tr, th, td {
+    border: 1px solid black;
+  }
 `;
 
 const counter = (props) => {
@@ -13,27 +22,29 @@ const counter = (props) => {
   const personDetails = () => {
     const personArrays = props?.persons.map((item) => {
       return (
-        <Row>
-          <Col md={3} xs={3} style={{ float: 'left', paddingRight: '20px' }}>
-            {item?.name}
-          </Col>
-          <Col md={3} xs={3} style={{ float: 'left', paddingRight: '20px' }}>
-            {item?.age}
-          </Col>
-          <Col md={3} xs={3} style={{ float: 'left', paddingRight: '20px' }}>
-            {item?.qualification}
-          </Col>
-        </Row>
+        <tr>
+          <td>{item?.name}</td>
+          <td>{item?.age}</td>
+          <td>{item?.qualification}</td>
+        </tr>
       );
     });
-    return <Container fluid="xs">{personArrays}</Container>;
+    return (
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Qualification</th>
+        </tr>
+        {personArrays}
+      </table>
+    );
   };
 
   return (
     <Wrapper>
       <p>Increamenting the state values {state}</p>
       <button onClick={() => increament()}>Count</button>
-      <br />
       {personDetails()}
       {/* <Suspense fallback={<h1>Loading posts...</h1>}>
           <ProfileTimeline />
